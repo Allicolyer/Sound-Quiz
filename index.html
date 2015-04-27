@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Music Awards</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.3.5/tabletop.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				  var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1_lVy8N7NfSys9ZEJVLZE0B_YrTKrasgEAcwis3jnzL8/pubhtml';
+				  var getData = function () {
+				    Tabletop.init({ 
+				    	"key": public_spreadsheet_url,
+				        "callback": processData,
+				        "simpleSheet": true
+				    });
+				  }
+
+				  var processData = function(data){
+				  	console.log(data)
+			// start setting up the most popular songs
+			// set all the counters to zero initally
+				  	var jazzcounter = 0 
+				  	var folkcounter = 0 
+				  	var hiphopcounter = 0 
+				  	var rockcounter = 0 
+				  	var popcounter = 0 
+				  	var bluescounter = 0 
+				  	var funkcounter = 0
+				  	var metalcounter = 0 
+				  	var piratescounter = 0 
+				  	var sleepycounter = 0 
+				  	var smashmouthcounter = 0
+
+				  	for(var i=0; i<data.length; i++) {
+				  		var genre = data[i].genre
+
+				  		if (genre === "Jazz"){
+				  			var jazzcounter = jazzcounter +1
+				  		}
+				  		else if (genre === "Folk"){
+				  			var folkcounter = folkcounter +1
+				  		}
+				  		else if (genre === "Hip Hop"){
+				  			var hiphopcounter = hiphopcounter +1
+				  		}
+				  		else if (genre === "Rock"){
+				  			var rockcounter = rockcounter +1
+				  		}
+				  		else if (genre === "Pop"){
+				  			var popcounter = popcounter +1
+				  		}
+				  		else if (genre === "Blues"){
+				  			var bluescounter = bluescounter +1
+				  		}
+				  		else if (genre === "Funk"){
+				  			var funkcounter = funkcounter +1
+				  		}
+
+				  		else if (genre === "Metal"){
+				  			var metalcounter = metalcounter +1
+				  		}
+				  		else if (genre === "Pirates"){
+				  			var piratescounter = piratescounter +1
+				  		}
+				  		else if (genre === "Sleepy"){
+				  			var sleepycounter = sleepycounter +1
+				  		}
+				  		else if (genre === "Smash Mouth"){
+				  			var smashmouthcounter = smashmouthcounter +1
+				  		}
+
+				  	}	
+
+				  	// make a counter array so that you can find the maximum of it
+
+				  	var counter = [
+				  	jazzcounter,
+				  	folkcounter,
+				  	hiphopcounter, 
+				  	rockcounter, 
+				  	popcounter, 
+				  	bluescounter,
+				  	funkcounter, 
+				  	metalcounter, 
+				  	piratescounter, 
+				  	sleepycounter,  
+				  	smashmouthcounter
+				  	];
+
+				  	//find the maximum
+				  	var max = Math.max.apply(Math, counter);
+				  	// set up some vars to make appending cleaner
+				  	var html1 = "<audio controls> <source src = songs/"
+				  	var html2 = ".mp3 type='audio/mp3' reload='none'> Your browser does not support the audio element.</audio> <br />"
+		
+				  	// I will be using this to add an s to song if there is a more than one song displayed. 
+				  	var scounter = 0
+				  	// By not using else if, I am allowing more than one song to be displayed in case of a tie.
+				  	if (max === jazzcounter) {
+				  		var type = "jazz"   
+				  		var html = html1 + type + html2  
+				  		$('#peoplemusic').append("Jazz <br />" + html) 
+				  		var scounter = scounter + 1
+				  		}
+			        if (max === folkcounter) {
+				  		var type = "folk" 
+				  		var html = html1 + type + html2
+				  		$('#peoplemusic').append("Folk <br />" + html) 
+				  		var scounter = scounter + 1
+				  		 } 
+			        if (max === hiphopcounter) {
+				  		var type = "Hip%20Hop"   
+				  		var html = html1 + type + html2
+				  		$('#peoplemusic').append("Hip Hop <br />" + html) 
+				  		var scounter = scounter + 1 
+				  		 }
+			        if (max === rockcounter) {
+				  		var type = "rock"  
+				  		var html = html1 + type + html2
+				  		$('#peoplemusic').append("Rock <br />" + html) 
+				  		var scounter = scounter + 1 
+				  		}
+				  	if (max === popcounter) {
+				  		var type = "pop"  
+				  		var html = html1 + type + html2  
+				  		$('#peoplemusic').append("Pop <br />" + html) 
+				  		var scounter = scounter + 1
+				  		 }
+					if (max === bluescounter) {
+				  		var type = "blues"
+				  		var html = html1 + type + html2  
+				  		$('#peoplemusic').append("Blues <br />" + html) 
+				  		var scounter = scounter + 1 
+				  		}
+				  	if (max === funkcounter) {
+				  		var type = "Funk"
+				  		var html = html1 + type + html2  
+				  		$('#peoplemusic').append("Funk <br />" + html) 
+				  		var scounter = scounter + 1 
+				  		}
+				  	if (max === metalcounter) {
+				  		var type = "metal" 
+				  		var html = html1 + type + html2  
+				  		$('#peoplemusic').append("Metal <br />" + html) 
+				  		var scounter = scounter + 1
+				  		 }
+				  	if (max === piratescounter) {
+				  		var type = "pirates" 
+				  		var html = html1 + type + html2   
+				  		$('#peoplemusic').append("Pirates <br />" + html) 
+				  		var scounter = scounter + 1 
+				  		}
+				  	if (max === sleepycounter) {
+				  		var type = "sleepy"	  
+				  		var html = html1 + type + html2 
+				  		$('#peoplemusic').append("Sleepy <br />" + html)   
+				  		var scounter = scounter + 1
+				  		}
+				  	if (max === smashmouthcounter) {
+				  		var type = "Smash%20Mouth"	  
+				  		var html = html1 + type + html2 
+				  		$('#peoplemusic').append("Smash Mouth <br />" + html)   
+				  		var scounter = scounter + 1
+				  		}
+				  	// appends the text according to if there is one song or mutiple songs
+				  	if (scounter === 1) {
+				  		$('#peopletext').append("The song of the people is <br />")
+				  		}
+				  	else {
+				  		$('#peopletext').append("The songs of the people are <br />")
+				  		}
+					
+					// this is to append the song the last user put 
+				  	var length = data.length -1
+				  	var lastsong = data[length].genre
+				  	var genre = lastsong
+				  		if (lastsong ==="Hip Hop") {
+				  			var lastsong = "Hip%20Hop"
+				  			var genre = "Hip Hop"
+				  		}
+				  		if (lastsong ==="Smash Mouth"){
+				  			var lastsong = "Smash%20Mouth"
+				  			var genre = "Smash Mouth"
+				  		}
+	
+				  	var html = html1 + lastsong + html2  
+				  	$('#yourmusic').append(genre +"<br />" + html)
+					}
+
+				getData();
+			});
+		</script>
+		<style>
+		html {
+			background-image: url(http://i1.mirror.co.uk/incoming/article3296706.ece/alternates/s2197/Unimpressed-Simon-Cowell.jpg) ;
+			background-repeat: no-repeat;
+			background-size: cover;
+			padding: 10px;
+		}
+
+		.text {
+			color: #383838;
+			font-family: 'Gill Sans',' Gill Sans MT', Calibri, sans-serif;
+			font-size: 20px;
+   			text-shadow:
+    			1px 1px 1px white,
+    			2px -1px 1px white,
+    			-1px -1px 1px white,
+    			-1px 1px 1px white;
+		}
+
+		header.text {
+			font-size: 80px;
+			text-align: center;
+		}
+
+		div.text {
+			font-size:14px;
+		}
+
+		span.text {
+			font-size: 20px;
+		}
+
+		#peoplemusic {
+			float:left;
+		}
+
+		#yourmusic {
+			float:right;
+		}
+
+		</style>
+
+	</head>
+	<body>
+		<header class = "text"> Music Awards </header>
+		<div id="yourmusic" class="text"> <span class = "text"> The last person voted for </span> <br />
+		</div>
+		<div id = "peoplemusic" class="text"> 
+		<span id ="peopletext" class ="text"></span>
+		</div>
+	</body>
+	</html>
